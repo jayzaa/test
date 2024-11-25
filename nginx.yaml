@@ -10,7 +10,7 @@ data:
         # Default location to display the visitor's IP address
         location / {
             default_type text/plain;
-            return 200 "Your IP is: $host\n K8S Pod IP is: $remote_addr\n";
+            return 200 "Your IP is: $host\nK8S Backend Pod IP is: $remote_addr\n";
         }
 
     }
@@ -80,4 +80,4 @@ spec:
       name: cpu
       target:
         type: Utilization
-        averageUtilization: 50
+        averageUtilization: 25
