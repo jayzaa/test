@@ -6,11 +6,16 @@ data:
   default.conf: |
     server {
         listen 80;
-
+        default_type text/plain;
+        # Extract the real client IP from X-Forwarded-For header
+        set $real_ip $http_x_forwarded_for;
+            if ($real_ip = "") {
+                set $real_ip $remote_addr;
+            }
         # Default location to display the visitor's IP address
         location / {
             default_type text/plain;
-            return 200 "Your IP is: $host\nK8S Backend Pod IP is: $remote_addr\n";
+            return 200 "Your IP is: $real_ip\nK8S Backend Pod IP is: $remote_addr\n";
         }
 
     }
