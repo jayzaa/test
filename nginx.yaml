@@ -61,7 +61,6 @@ metadata:
   name: nginx-service
   annotations:
     cloud.google.com/neg: '{"ingress": true}'
-    networking.gke.io/load-balancer-type: "L7"
 spec:
   selector:
     app: nginx
