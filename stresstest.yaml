@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cpu-load
+spec:
+  replicas: 10
+  selector:
+    matchLabels:
+      app: cpu-load
+  template:
+    metadata:
+      labels:
+        app: cpu-load
+    spec:
+      containers:
+      - name: cpu-load-container
+        image: alpine:latest
+        command: ["sh", "-c", "apk add --no-cache stress-ng && stress-ng --cpu 2"]
+        resources:
+          requests:
+            cpu: "500m"
