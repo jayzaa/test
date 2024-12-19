@@ -32,9 +32,9 @@ spec:
     spec:
 #Add Toleration for assign specific node group
       tolerations:
-      - key: group
+      - key: group  #Key Name
         operator: Equal
-        value: "nginx"
+        value: "nginx" #Value for filtering
         effect: NoSchedule
       nodeSelector:
         group: "nginx" #Your preferred node group
