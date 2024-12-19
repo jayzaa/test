@@ -32,12 +32,19 @@ spec:
     spec:
 #Add Toleration for assign specific node group
       tolerations:
-      - key: group  #Key Name
+      - key: isolated_for  #Key Name in Node Pool
         operator: Equal
         value: "nginx" #Value for filtering
         effect: NoSchedule
-      nodeSelector:
-        group: "nginx" #Your preferred node group
+      affinity:
+        nodeAffinity:
+          requiredDuringSchedulingIgnoredDuringExecution:
+            nodeSelectorTerms: #This section must map with kubernetes label in node-pool key, not normal label
+            - matchExpressions:
+              - key: app_label
+                operator: In
+                values:
+                - "nginx"
       containers:
       - name: nginx
         image: nginx:latest
